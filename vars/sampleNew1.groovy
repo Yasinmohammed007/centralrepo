@@ -9,6 +9,8 @@ def call(body){
     //def message = "${config.commitMessage}".toString()
     def branch = config.brname
     def namei = config.name
+    def lis_task = config.list_task
+    println lis_task
     println "hi inside"
     println branch
     pipeline {
