@@ -8,34 +8,32 @@ def call(body){
     echo 'Checking Variables'
     //def message = "${config.commitMessage}".toString()
     def branch = config.brname
+    def namei = config.name
     println "hi inside"
     println branch
+    pipeline {
+        agent any
 
-}
-def call(String name = 'User') {
-		echo "Welcome, ${name}."
-        pipeline {
-            agent any
-
-            stages {
-                stage('Build') {
-                    steps {
-                        echo 'Building..'
-                        echo "Welcome, ${name}."
-                    }
+        stages {
+            stage('Build') {
+                steps {
+                    echo 'Building..'
+                    echo "Welcome, ${namei}."
                 }
-                stage('Test') {
-                    steps {
-                        echo 'Testing..'
-                        echo "Welcome, ${vm_ip}."
-                    }
+            }
+            stage('Test') {
+                steps {
+                    echo 'Testing..'
+                    echo "Welcome:",namei
                 }
-                stage('Deploy') {
-                    steps {
-                        echo 'Deploying....'
-                    }
+            }
+            stage('Deploy') {
+                steps {
+                    echo 'Deploying....'
+                    echo "Welcome,",vm_ip
                 }
             }
         }
+    }
 }
 
