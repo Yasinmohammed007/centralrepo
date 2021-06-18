@@ -19,18 +19,19 @@ def call(body){
                 steps {
                     echo 'Building..'
                     echo "Welcome, ${namei}."
+                    println namei
                 }
             }
             stage('Test') {
                 steps {
                     echo 'Testing..'
-                    echo "Welcome:",namei
+                    println branch
                 }
             }
             stage('Deploy') {
                 steps {
                     echo 'Deploying....'
-                    echo "Welcome,",vm_ip
+                    echo "Welcome"
                 }
             }
         }
