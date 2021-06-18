@@ -1,25 +1,26 @@
 def call(String name = 'User') {
 		echo "Welcome, ${name}."
-}
-pipeline {
-    agent any
+        pipeline {
+            agent any
 
-    stages {
-        stage('Build') {
-            steps {
-                echo 'Building..'
-                echo "Welcome, ${name}."
+            stages {
+                stage('Build') {
+                    steps {
+                        echo 'Building..'
+                        echo "Welcome, ${name}."
+                    }
+                }
+                stage('Test') {
+                    steps {
+                        echo 'Testing..'
+                    }
+                }
+                stage('Deploy') {
+                    steps {
+                        echo 'Deploying....'
+                    }
+                }
             }
         }
-        stage('Test') {
-            steps {
-                echo 'Testing..'
-            }
-        }
-        stage('Deploy') {
-            steps {
-                echo 'Deploying....'
-            }
-        }
-    }
 }
+
