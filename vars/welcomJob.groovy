@@ -1,6 +1,10 @@
 def call(String name = 'User') {
 	echo "Welcome, ${name}."
 }
+
+def call(String desc = 'jom') {
+	echo "Welcome, ${desc}."
+}
 sh """
-	 "Welcome, ${desc}."
+	 echo Welcome, ${desc}.
 """
