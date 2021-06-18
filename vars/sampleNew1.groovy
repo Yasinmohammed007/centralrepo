@@ -17,11 +17,13 @@ def call(body){
         agent any
 
         stages {
-            stage('Build') {
-                steps {
-                    echo 'Building..'
-                    echo "Welcome, ${namei}."
-                    println namei
+            if(lis_task.contains('deploy')){
+                stage('Build') {
+                    steps {
+                        echo 'Building..'
+                        echo "Welcome, ${namei}."
+                        println namei
+                    }
                 }
             }
             stage('Test') {
