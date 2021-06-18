@@ -17,13 +17,18 @@ def call(body){
         agent any
 
         stages {
-            if(lis_task.contains('deploy')){
-                stage('Build') {
-                    steps {
-                        echo 'Building..'
+            stage('Build') {
+                steps {
+                    echo 'Building..'
+                    if(lis_task.contains('deploy')){
                         echo "Welcome, ${namei}."
+                        chat_in()
+                    }
+                    else{
+                        println "Skipping deploy...."
                         println namei
                     }
+                    
                 }
             }
             stage('Test') {
@@ -40,5 +45,9 @@ def call(body){
             }
         }
     }
+}
+
+def chat_in(){
+    println "Yes, Deploy is added...."
 }
 
