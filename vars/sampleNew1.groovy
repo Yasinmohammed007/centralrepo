@@ -20,15 +20,16 @@ def call(body){
             stage('Build') {
                 steps {
                     echo 'Building..'
-                    if(lis_task.contains('deploy')){
-                        echo "Welcome, ${namei}."
-                        chat_in()
+                    script{
+                        if(lis_task.contains('deploy')){
+                            echo "Welcome, ${namei}."
+                            chat_in()
+                        }
+                        else{
+                            println "Skipping deploy...."
+                            println namei
+                        }
                     }
-                    else{
-                        println "Skipping deploy...."
-                        println namei
-                    }
-                    
                 }
             }
             stage('Test') {
