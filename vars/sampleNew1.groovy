@@ -15,7 +15,6 @@ def call(body){
     println branch
     pipeline {
         agent any
-
         stages {
             stage('Build') {
                 steps {
