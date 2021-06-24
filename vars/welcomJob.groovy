@@ -8,6 +8,8 @@ def call(body){
     def job_name = env.JOB_NAME.split('/')[-1]
     def branch = config.brname
     def namei = config.name
+    def chartName = config.chart_name
+    def chartLocation = config.chart_location
     def lis_task = config.list_task
     println namei
     println lis_task
@@ -69,7 +71,7 @@ def call(body){
                         
                     sh """
                         pwd
-                        cd deploy/sampleChart;helm install testchart . --kubeconfig ${kube_config_fullpath}
+                        cd ${chartLocation}/${chartName};helm install testchart . --kubeconfig ${kube_config_fullpath}
 
                     """
                 }
@@ -80,7 +82,7 @@ def call(body){
                         
                     sh """
                         pwd
-                        helm test testchart --logs --kubeconfig ${kube_config_fullpath}
+                        helm test ${chartName} --logs --kubeconfig ${kube_config_fullpath}
 
                     """
                 }
