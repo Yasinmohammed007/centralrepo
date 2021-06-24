@@ -22,11 +22,12 @@ def call(body){
         echo "git_cred are: ${git_cred}"
         dir(unique_dir){
             try{
+                checkout scm
                 println """
                     Machine Name
                     ls -lrth
                 """
-                // checkout_helm_chart_reference()
+                checkout_helm_chart_reference()
                 sh"""
                     pwd
                     
