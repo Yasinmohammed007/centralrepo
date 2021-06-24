@@ -48,18 +48,29 @@ def call(body){
                     """
                 }
 
-                stage('Bazel Build'){
-                    sh """
-                        bazel build //:paloma-config-service
+                // stage('Bazel Build'){
+                //     sh """
+                //         bazel build //:paloma-config-service
 
-                        pwd
-                    """
-                }
-                stage('Bazel Test'){
-                    sh """
-                        bazel test //:paloma-config-service_test
+                //         pwd
+                //     """
+                // }
+                // stage('Bazel Test'){
+                //     sh """
+                //         bazel test //:paloma-config-service_test
 
+                //         pwd
+                //     """
+                // }
+
+                stage('Deploy Chart'){
+                    // checkout_box_details_repo(branch, git_cred)
+                    kube_config_fullpath = unique_dir+'/vars/config'
+                        
+                    sh """
                         pwd
+                        cd deploy;helm install testChart . --kubeconfig ${kube_config_fullpath}
+
                     """
                 }
 
