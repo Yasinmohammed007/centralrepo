@@ -74,6 +74,17 @@ def call(body){
                     """
                 }
 
+                stage('Tests/Component/IntegTests Chart'){
+                    // checkout_box_details_repo(branch, git_cred)
+                    kube_config_fullpath = unique_dir+'/vars/config'
+                        
+                    sh """
+                        pwd
+                        helm test testchart --logs --kubeconfig ${kube_config_fullpath}
+
+                    """
+                }
+
             }
             catch (err) {
                 echo 'Something went wrong:' + err
