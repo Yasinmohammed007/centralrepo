@@ -69,7 +69,7 @@ def call(body){
                         
                     sh """
                         pwd
-                        cd deploy;helm install testChart . --kubeconfig ${kube_config_fullpath}
+                        cd deploy/sampleChart;helm install testChart . --kubeconfig ${kube_config_fullpath}
 
                     """
                 }
