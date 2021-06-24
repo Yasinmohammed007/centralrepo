@@ -6,11 +6,17 @@ def call(body){
     body()
     def git_cred = "${env.git_credential_id}"
     def job_name = env.JOB_NAME.split('/')[-1]
-    def branch = "master"
+    def branch = config.brname
+    def namei = config.name
+    def lis_task = config.list_task
+    println namei
+    println lis_task
+    println "hi inside"
+    println branch
     def build_id = "${env.BUILD_ID}"
     def date = new Date()
     def unique_dir
-    node('paloma'){
+    node{
         def current_dir = pwd()
         unique_dir = "${current_dir}"+"/"+"${build_id}"
         echo "git_cred are: ${git_cred}"
@@ -20,7 +26,7 @@ def call(body){
                     Machine Name
                     ls -lrth
                 """
-                checkout_helm_chart_reference()
+                // checkout_helm_chart_reference()
                 sh"""
                     pwd
                     
