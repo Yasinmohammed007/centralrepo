@@ -18,6 +18,7 @@ def call(body){
     def build_id = "${env.BUILD_ID}"
     def date = new Date()
     def unique_dir
+    def docker_image_path
     node{
         def current_dir = pwd()
         unique_dir = "${current_dir}"+"/"+"${build_id}"
@@ -39,7 +40,7 @@ def call(body){
 
                 }
 
-                stage('Setup Base Environment'){
+                stage('Setup Base k3s Environment'){
                     // checkout_box_details_repo(branch, git_cred)
                     kube_config_fullpath = unique_dir+'/vars/config'
                         
@@ -64,6 +65,18 @@ def call(body){
                 //         pwd
                 //     """
                 // }
+
+                stage('Build Docker Images'){
+                    // checkout_box_details_repo(branch, git_cred)
+                    kube_config_fullpath = unique_dir+'/vars/config'
+                    docker_image_path = unique_dir+'/tests/'
+                        
+                    sh """
+                        pwd
+                        cd ${docker_image_path};docker build --tag python-docker .
+
+                    """
+                }
 
                 stage('Deploy Chart'){
                     // checkout_box_details_repo(branch, git_cred)
