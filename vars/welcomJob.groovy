@@ -74,6 +74,7 @@ def call(body){
                     sh """
                         pwd
                         cd ${docker_image_path};docker build --tag python-docker .
+                        
 
                     """
                 }
@@ -94,8 +95,9 @@ def call(body){
                     kube_config_fullpath = unique_dir+'/vars/config'
                         
                     sh """
+                        sleep 10
                         pwd
-                        helm test ${chartName} --logs --kubeconfig ${kube_config_fullpath}
+                        helm test testchart --logs --kubeconfig ${kube_config_fullpath}
 
                     """
                 }
