@@ -34,7 +34,7 @@ def call(body){
         echo "git_cred are: ${git_cred}"
         dir(unique_dir){
             try{
-                // checkout scm
+                checkout scm
                 // checkout_helm_chart_reference()
                 println """
                     Machine Name
