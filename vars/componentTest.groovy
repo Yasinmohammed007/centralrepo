@@ -31,13 +31,14 @@ def call(body){
         echo "git_cred are: ${git_cred}"
         dir(unique_dir){
             try{
-                // checkout scm
-                checkout_helm_chart_reference()
+                checkout scm
+                // checkout_helm_chart_reference()
                 println """
                     Machine Name
                     ls -lrth
+                    env
                 """
-                checkout_helm_chart_reference()
+                // checkout_helm_chart_reference()
                 sh"""
                     pwd
                     
@@ -58,21 +59,21 @@ def call(body){
                     """
                 }
 
-                stage('Bazel Build'){
-                    sh """
-                        bazel build //:paloma-config-service
+                // stage('Bazel Build'){
+                //     sh """
+                //         bazel build //:paloma-config-service
 
-                        pwd
-                    """
-                }
+                //         pwd
+                //     """
+                // }
 
-                stage('Bazel Test'){
-                    sh """
-                        bazel test //:paloma-config-service_test
+                // stage('Bazel Test'){
+                //     sh """
+                //         bazel test //:paloma-config-service_test
 
-                        pwd
-                    """
-                }
+                //         pwd
+                //     """
+                // }
 
                 // stage('Build Docker Images'){
                 //     // checkout_box_details_repo(branch, git_cred)
