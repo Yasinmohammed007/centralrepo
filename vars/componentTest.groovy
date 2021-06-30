@@ -21,6 +21,8 @@ def call(body){
     def docker_image_path
     node{
         def current_dir = pwd()
+        def repositoryUrl = scm.userRemoteConfigs[0].url  
+        println repositoryUrl
         def cluster_conf_file = "cluster${build_id}.yaml"
         println cluster_conf_file
         def kubeconfig_path = current_dir+"/.kube/"
