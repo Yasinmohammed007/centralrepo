@@ -21,9 +21,12 @@ def call(body){
     def docker_image_path
     node{
         def current_dir = pwd()
-        def cluster_id_file = "cluster${build_id}.yaml"
-        println cluster_id_file
+        def cluster_conf_file = "cluster${build_id}.yaml"
+        println cluster_conf_file
         def kubeconfig_path = current_dir+"/.kube/"
+        println kubeconfig_path
+        def cluster_name = "cluster"+build_id
+        println cluster_name
         println kubeconfig_path
         unique_dir = "${current_dir}"+"/"+"${build_id}"
         echo "git_cred are: ${git_cred}"
@@ -50,7 +53,7 @@ def call(body){
                         
                     sh """
                         pwd
-                        KUBECONFIG=${kubeconfig_path+cluster_id_file} k3d cluster create ${cluster_id_file}
+                        KUBECONFIG=${kubeconfig_path+cluster_conf_file} k3d cluster create ${cluster_id_file}
 
                     """
                 }
