@@ -16,6 +16,7 @@ def call(body){
     println "Inside ComponentTesting Groovy..."
     println branch
     def build_id = "${env.BUILD_ID}"
+    def main_branch = "${env.BRANCH_NAME}"
     def date = new Date()
     def unique_dir
     def docker_image_path
@@ -128,5 +129,5 @@ def call(body){
 
 def checkout_helm_chart_reference() {
     // git branch: "master", changelog: false, credentialsId: 'c2ee76ab-2227-4b93-b008-084312e64921', poll: false, url: 'git@gitlab-gxp.cloud.health.ge.com:edison-imaging-service-poc/catalyst/helm_chart_reference.git'
-    checkout([$class: 'GitSCM', branches: [[name: '*/demo']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/Yasinmohammed007/Firstone.git']]])
+    checkout([$class: 'GitSCM', branches: [[name: main_branch]], extensions: [], userRemoteConfigs: [[url: repositoryUrl]]])
 }
