@@ -27,12 +27,12 @@ def call(body){
         println kubeconfig_path
         def cluster_name = "cluster"+build_id
         println cluster_name
-        println kubeconfig_path
         unique_dir = "${current_dir}"+"/"+"${build_id}"
         echo "git_cred are: ${git_cred}"
         dir(unique_dir){
             try{
-                checkout scm
+                // checkout scm
+                checkout_helm_chart_reference()
                 println """
                     Machine Name
                     ls -lrth
@@ -53,25 +53,26 @@ def call(body){
                         
                     sh """
                         pwd
-                        KUBECONFIG=${kubeconfig_path+cluster_conf_file} k3d cluster create ${cluster_id_file}
+                        KUBECONFIG=${kubeconfig_path+cluster_conf_file} k3d cluster create ${cluster_name}
 
                     """
                 }
 
-                // stage('Bazel Build'){
-                //     sh """
-                //         bazel build //:paloma-config-service
+                stage('Bazel Build'){
+                    sh """
+                        bazel build //:paloma-config-service
 
-                //         pwd
-                //     """
-                // }
-                // stage('Bazel Test'){
-                //     sh """
-                //         bazel test //:paloma-config-service_test
+                        pwd
+                    """
+                }
 
-                //         pwd
-                //     """
-                // }
+                stage('Bazel Test'){
+                    sh """
+                        bazel test //:paloma-config-service_test
+
+                        pwd
+                    """
+                }
 
                 // stage('Build Docker Images'){
                 //     // checkout_box_details_repo(branch, git_cred)
@@ -123,5 +124,5 @@ def call(body){
 
 def checkout_helm_chart_reference() {
     // git branch: "master", changelog: false, credentialsId: 'c2ee76ab-2227-4b93-b008-084312e64921', poll: false, url: 'git@gitlab-gxp.cloud.health.ge.com:edison-imaging-service-poc/catalyst/helm_chart_reference.git'
-    checkout([$class: 'GitSCM', branches: [[name: '*/master']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/Yasinmohammed007/Firstone.git']]])
+    checkout([$class: 'GitSCM', branches: [[name: '*/demo']], extensions: [], userRemoteConfigs: [[url: 'https://github.com/Yasinmohammed007/Firstone.git']]])
 }
