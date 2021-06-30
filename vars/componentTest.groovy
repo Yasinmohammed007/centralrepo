@@ -31,16 +31,17 @@ def call(body){
         echo "git_cred are: ${git_cred}"
         dir(unique_dir){
             try{
-                checkout scm
+                // checkout scm
                 // checkout_helm_chart_reference()
                 println """
                     Machine Name
                     ls -lrth
-                    env
+                    
                 """
                 // checkout_helm_chart_reference()
                 sh"""
                     pwd
+                    env
                     
                 """
                 stage("box_install"){
@@ -48,16 +49,16 @@ def call(body){
 
                 }
 
-                stage('Setup Base k3d Environment'){
-                    // checkout_box_details_repo(branch, git_cred)
-                    kube_config_fullpath = unique_dir+'/vars/config'
+                // stage('Setup Base k3d Environment'){
+                //     // checkout_box_details_repo(branch, git_cred)
+                //     kube_config_fullpath = unique_dir+'/vars/config'
                         
-                    sh """
-                        pwd
-                        KUBECONFIG=${kubeconfig_path+cluster_conf_file} k3d cluster create ${cluster_name}
+                //     sh """
+                //         pwd
+                //         KUBECONFIG=${kubeconfig_path+cluster_conf_file} k3d cluster create ${cluster_name}
 
-                    """
-                }
+                //     """
+                // }
 
                 // stage('Bazel Build'){
                 //     sh """
